@@ -160,11 +160,11 @@ For example:
 
 ### Encrypt for HLS
 
-packager \
-  'input=input.mp4,stream=video,segment_template=output$Number$.ts,playlist_name=video_playlist.m3u8' \
-  'input=input.mp4,stream=audio,segment_template=output_audio$Number$.ts,playlist_name=audio_playlist.m3u8,hls_group_id=audio,hls_name=ENGLISH' \
-  --hls_master_playlist_output="master_playlist.m3u8" \
-  --hls_base_url="http://localhost:10000/"
+    packager \
+      'input=input.mp4,stream=video,segment_template=output$Number$.ts,playlist_name=video_playlist.m3u8' \
+      'input=input.mp4,stream=audio,segment_template=output_audio$Number$.ts,playlist_name=audio_playlist.m3u8,hls_group_id=audio,hls_name=ENGLISH' \
+      --hls_master_playlist_output="master_playlist.m3u8" \
+      --hls_base_url="http://localhost:1000/"
  
 This command will accept a key with either 16 or 32 characters.
  
@@ -185,11 +185,11 @@ random hex digits.
       --aes_signing_key "1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9" \
       --aes_signing_iv "d58ce954203b7c9a9a9d467f59839249"
 
-All Together Now
+## All Together Now
 
-Packager/DASH
+### Packager/DASH
 
-Packager/HLS
+### Packager/HLS
 
-ffmpeg/HLS
+### ffmpeg/HLS
 
