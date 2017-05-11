@@ -200,11 +200,31 @@ random hex digits.
 
 ## All Together Now
 
-### DASH/webm with Packager
+### DASH/webm with Shaka Packager
 
-### DASH/mp4 with Packager
+Not all steps are possible with Shaka Packager.
 
-### HLS/mp4 with Packager
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libvpx-vp9 -c:a liborbis myvideo.mp4
+    
+For this command you can use either `liborbis` or `libopus` for the audio codec.
+
+### DASH/mp4 with Shaka Packager
+
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
+
+### HLS/mp4 with Shaka Packager
+
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
 
 ### HLS/mp4 with ffmpeg
+
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
 
