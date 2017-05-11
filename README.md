@@ -232,6 +232,19 @@ Not all steps are possible with Shaka Packager.
       -key 7bbef28644876a545a40caaaad9b3200 -key_id 7bbef28644876a545a40caaaad9b3200 \
       --mpd_output myvideo_vod.mpd
     ```
+    
+    _or_
+    
+    ```
+    packager \
+      input=glocken.mp4,stream=video,output=enc_glocken.mp4 \
+      input=myvide.mp4,stream=audio,output=enc_myaudio.m4a \
+      --enable_widevine_encryption \
+      --key_server_url "https://license.uat.widevine.com/cenc/getcontentkey/widevine_test" \
+      --content_id "fd385d9f9a14bb09" --signer "widevine_test" \
+      --aes_signing_key "1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9" \
+      --aes_signing_iv "d58ce954203b7c9a9a9d467f59839249"
+    ```
 
 ### DASH/mp4 with Shaka Packager
 
