@@ -202,6 +202,12 @@ random hex digits.
 
 ### DASH/webm with Shaka Packager
 
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
+
+### DASH/mp4 with Shaka Packager
+
 Not all steps are possible with Shaka Packager.
 
 1. Convert the file type, video codec and bitrate.
@@ -245,12 +251,6 @@ Not all steps are possible with Shaka Packager.
       --aes_signing_key "1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9" \
       --aes_signing_iv "d58ce954203b7c9a9a9d467f59839249"
     ```
-
-### DASH/mp4 with Shaka Packager
-
-1. Convert the file type and codec.
-
-    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
 
 ### HLS/mp4 with Shaka Packager
 
