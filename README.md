@@ -226,8 +226,8 @@ Not all steps are possible with Shaka Packager.
 
     ```
     packager \
-      input=myvideo.mp4,stream=audio,output=glocka.m4a \
-      input=myvideo.mp4,stream=video,output=glockv.mp4 \
+      input=mymovie.mp4,stream=audio,output=myaudio.m4a \
+      input=mymovie.mp4,stream=video,output=myvideo.mp4 \
       --enable_fixed_key_encryption --enable_fixed_key_decryption \
       -key 7bbef28644876a545a40caaaad9b3200 -key_id 7bbef28644876a545a40caaaad9b3200 \
       --mpd_output myvideo_vod.mpd
@@ -237,8 +237,8 @@ Not all steps are possible with Shaka Packager.
     
     ```
     packager \
-      input=glocken.mp4,stream=video,output=enc_glocken.mp4 \
-      input=myvide.mp4,stream=audio,output=enc_myaudio.m4a \
+      input=mymovie.mp4,stream=audio,output=myaudio.m4a \
+      input=mymovie.mp4,stream=video,output=myvideo.mp4 \
       --enable_widevine_encryption \
       --key_server_url "https://license.uat.widevine.com/cenc/getcontentkey/widevine_test" \
       --content_id "fd385d9f9a14bb09" --signer "widevine_test" \
