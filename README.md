@@ -224,12 +224,14 @@ Not all steps are possible with Shaka Packager.
 
    The `-key` and `-key_id` parameters are copied from the `media.key` file.
 
+    ```
     packager \
       input=myvideo.mp4,stream=audio,output=glocka.m4a \
       input=myvideo.mp4,stream=video,output=glockv.mp4 \
       --enable_fixed_key_encryption --enable_fixed_key_decryption \
       -key 7bbef28644876a545a40caaaad9b3200 -key_id 7bbef28644876a545a40caaaad9b3200 \
       --mpd_output myvideo_vod.mpd
+    ```
 
 ### DASH/mp4 with Shaka Packager
 
