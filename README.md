@@ -204,11 +204,32 @@ random hex digits.
 
 Not all steps are possible with Shaka Packager.
 
-1. Convert the file type and codec.
+1. Convert the file type, video codec and bitrate.
 
-    ffmpeg -i myrawvideo.mov -c:v libvpx-vp9 -c:a liborbis myvideo.mp4
-    
-For this command you can use either `liborbis` or `libopus` for the audio codec.
+   For this command you can use either `liborbis` or `libopus` for the audio codec. The default pixel format, yuv420p is used because one isn't supplied in the command line. The app will give you an error message that it is deprecated. I've chosen not to override the default because, though deprecated yuv420p is the most widely supported. The flags `-strict` and `-2` are needed to foce use of libvpx-vp9 for mp4 files, which ffmpeg considers experimental.
+
+    ```
+    ffmpeg -i mymovie.mov -c:v libvpx-vp9 -c:a copy -b:v 8M -strict -2 -b:v 8M mymovie.mp4
+    ```
+     
+3. Create a Clear Key encryption key.
+
+   You'll need to open the key file and manually remove all whitespace including the final carriage return.
+
+    ```
+    openssl rand 16 > media.key
+    ```
+
+2. Demux the audio and video, encrypt the new files, and output a media presentation description (MPD).
+
+   The `-key` and `-key_id` parameters are copied from the `media.key` file.
+
+    packager \
+      input=myvideo.mp4,stream=audio,output=glocka.m4a \
+      input=myvideo.mp4,stream=video,output=glockv.mp4 \
+      --enable_fixed_key_encryption --enable_fixed_key_decryption \
+      -key 7bbef28644876a545a40caaaad9b3200 -key_id 7bbef28644876a545a40caaaad9b3200 \
+      --mpd_output myvideo_vod.mpd
 
 ### DASH/mp4 with Shaka Packager
 
