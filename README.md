@@ -200,9 +200,11 @@ random hex digits.
 
 ## All Together Now
 
-### Packager/DASH
+### DASH/webm with Packager
 
-### Packager/HLS
+### DASH/mp4 with Packager
 
-### ffmpeg/HLS
+### HLS/mp4 with Packager
+
+### HLS/mp4 with ffmpeg
 
