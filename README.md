@@ -200,9 +200,69 @@ random hex digits.
 
 ## All Together Now
 
-### Packager/DASH
+### DASH/webm with Shaka Packager
 
-### Packager/HLS
+1. Convert the file type and codec.
 
-### ffmpeg/HLS
+    For this command you can use either `liborbis` or `libopus` for the audio codec. 
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4 
+
+### DASH/mp4 with Shaka Packager
+
+Not all steps are possible with Shaka Packager.
+
+1. Convert the file type, video codec and bitrate.
+
+   The default pixel format, yuv420p is used because one isn't supplied in the command line. The app will give you an error message that it is deprecated. I've chosen not to override the default because, though deprecated yuv420p is the most widely supported. 
+
+    ```
+    ffmpeg -i mymovie.mov -c:v libx264 -c:a aac -b:v 8M -strict -2 -b:v 8M mymovie.mp4
+    ```
+     
+3. Create a Clear Key encryption key.
+
+   You'll need to open the key file and manually remove all whitespace including the final carriage return.
+
+    ```
+    openssl rand 16 > media.key
+    ```
+
+2. Demux the audio and video, encrypt the new files, and output a media presentation description (MPD).
+
+   The `-key` and `-key_id` parameters are copied from the `media.key` file.
+
+    ```
+    packager \
+      input=mymovie.mp4,stream=audio,output=myaudio.m4a \
+      input=mymovie.mp4,stream=video,output=myvideo.mp4 \
+      --enable_fixed_key_encryption --enable_fixed_key_decryption \
+      -key 7bbef28644876a545a40caaaad9b3200 -key_id 7bbef28644876a545a40caaaad9b3200 \
+      --mpd_output myvideo_vod.mpd
+    ```
+    
+    _or_
+    
+    ```
+    packager \
+      input=mymovie.mp4,stream=audio,output=myaudio.m4a \
+      input=mymovie.mp4,stream=video,output=myvideo.mp4 \
+      --enable_widevine_encryption \
+      --key_server_url "https://license.uat.widevine.com/cenc/getcontentkey/widevine_test" \
+      --content_id "fd385d9f9a14bb09" --signer "widevine_test" \
+      --aes_signing_key "1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9" \
+      --aes_signing_iv "d58ce954203b7c9a9a9d467f59839249"
+    ```
+
+### HLS/mp4 with Shaka Packager
+
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
+
+### HLS/mp4 with ffmpeg
+
+1. Convert the file type and codec.
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
 
