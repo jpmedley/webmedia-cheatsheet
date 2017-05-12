@@ -217,7 +217,7 @@ Not all steps are possible with Shaka Packager.
    The default pixel format, yuv420p is used because one isn't supplied in the command line. The app will give you an error message that it is deprecated. I've chosen not to override the default because, though deprecated yuv420p is the most widely supported. 
 
     ```
-    ffmpeg -i mymovie.mov -c:v libx264 -c:a aac -b:v 8M -strict -2 -b:v 8M mymovie.mp4
+    ffmpeg -i mymovie.mov -c:v libx264 -c:a aac -b:v 8M -strict -2 mymovie.mp4
     ```
      
 3. Create a Clear Key encryption key.
