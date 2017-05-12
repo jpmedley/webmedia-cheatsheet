@@ -140,6 +140,12 @@ The same method for creating a key may be used with both DASH and HLS. The
 following will create a key made of 16 hex values.
  
     openssl rand 16 > media.key
+    
+This command creates a file with white space and new line characters, which are
+not allowed by Shaka Packager. You can pipe the output to some other commands
+before dumping it to a file.
+
+    openssl rand 16 | tr '\n' ' ' | sed 's/ //g' > media.key
 
 ### Encrypt for DASH
 
