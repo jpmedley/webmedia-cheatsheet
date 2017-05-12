@@ -204,7 +204,9 @@ random hex digits.
 
 1. Convert the file type and codec.
 
-    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4
+    For this command you can use either `liborbis` or `libopus` for the audio codec. 
+
+    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4 
 
 ### DASH/mp4 with Shaka Packager
 
@@ -212,10 +214,10 @@ Not all steps are possible with Shaka Packager.
 
 1. Convert the file type, video codec and bitrate.
 
-   For this command you can use either `liborbis` or `libopus` for the audio codec. The default pixel format, yuv420p is used because one isn't supplied in the command line. The app will give you an error message that it is deprecated. I've chosen not to override the default because, though deprecated yuv420p is the most widely supported. The flags `-strict` and `-2` are needed to foce use of libvpx-vp9 for mp4 files, which ffmpeg considers experimental.
+   The default pixel format, yuv420p is used because one isn't supplied in the command line. The app will give you an error message that it is deprecated. I've chosen not to override the default because, though deprecated yuv420p is the most widely supported. 
 
     ```
-    ffmpeg -i mymovie.mov -c:v libvpx-vp9 -c:a copy -b:v 8M -strict -2 -b:v 8M mymovie.mp4
+    ffmpeg -i mymovie.mov -c:v libx264 -c:a aac -b:v 8M -strict -2 -b:v 8M mymovie.mp4
     ```
      
 3. Create a Clear Key encryption key.
