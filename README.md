@@ -206,7 +206,30 @@ random hex digits.
 
     For this command you can use either `liborbis` or `libopus` for the audio codec. 
 
-    ffmpeg -i myrawvideo.mov -c:v libx264 -c:a aac myvideo.mp4 
+    ```
+    ffmpeg -i glocken.mov -c:v libvpx-vp9 -c:a libvorbis -b:v 8M -vf setsar=1:1 -f webm glocken.webm
+    ```
+
+2. Create a Clear Key encryption key.
+
+   You'll need to open the key file and manually remove all whitespace including the final carriage return.
+
+    ```
+    openssl rand 16 > media.key
+    ```
+
+3. Create a key information file.
+
+   ```
+   https://example.com/media.key
+   media.key
+   ```
+
+4. Demux the audio and video, encrypt the new files, and output a playlist file (m3u8).
+
+   ```
+   
+   ```
 
 ### DASH/mp4 with Shaka Packager
 
@@ -220,7 +243,7 @@ Not all steps are possible with Shaka Packager.
     ffmpeg -i mymovie.mov -c:v libx264 -c:a aac -b:v 8M -strict -2 mymovie.mp4
     ```
      
-3. Create a Clear Key encryption key.
+2. Create a Clear Key encryption key.
 
    You'll need to open the key file and manually remove all whitespace including the final carriage return.
 
@@ -228,7 +251,7 @@ Not all steps are possible with Shaka Packager.
     openssl rand 16 > media.key
     ```
 
-2. Demux the audio and video, encrypt the new files, and output a media presentation description (MPD).
+3. Demux the audio and video, encrypt the new files, and output a media presentation description (MPD).
 
    The `-key` and `-key_id` parameters are copied from the `media.key` file.
 
