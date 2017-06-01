@@ -90,6 +90,10 @@ For Shaka Packager:
       input=myvideo.mp4,stream=audio,output=myvideo_audio.mp4 \
       input=myvideo.mp4,stream=video,output=myvideo_video.mp4,bandwidth=8000000
 
+## Resize
+
+    ffmpeg -i myvideo.webm -s 1920x1080 myvideo_1980x1020.webm
+
 ## Make sure audio and video synchronize during playback
 
 To ensure that audio and video synchronize during playback insert keyframes.
